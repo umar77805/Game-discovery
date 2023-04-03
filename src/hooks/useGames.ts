@@ -1,4 +1,5 @@
-import { CanceledError } from "axios";
+import { Genres } from "./useGenres";
+import { AxiosRequestConfig, CanceledError } from "axios";
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 
@@ -21,7 +22,10 @@ interface GameResponse {
   results: Game[];
 }
 
-const useGames = () => {
+const useGames = (
+  selectedGenre: Genres | null,
+  requestConfig?: AxiosRequestConfig
+) => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -30,7 +34,10 @@ const useGames = () => {
     const controller = new AbortController();
     setLoading(true);
     apiClient
-      .get<GameResponse>("/games", { signal: controller.signal })
+      .get<GameResponse>("/games", {
+        signal: controller.signal,
+        ...requestConfig,
+      })
       .then((response) => {
         setGames(response.data.results);
         setLoading(false);
@@ -41,7 +48,7 @@ const useGames = () => {
         setLoading(false);
       });
     return () => controller.abort();
-  }, []);
+  }, [selectedGenre?.id]);
 
   return { games, error, isLoading };
 };
