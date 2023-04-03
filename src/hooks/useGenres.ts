@@ -5,6 +5,7 @@ import apiClient from "../services/api-client";
 interface Genres {
   id: number;
   name: string;
+  image_background: string;
 }
 
 interface GenreResponse {
