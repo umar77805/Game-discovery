@@ -24,7 +24,7 @@ const useGames = (selectedGenre: Genres | null) =>
     {
       params: { genres: selectedGenre?.id },
     },
-    selectedGenre
+    [selectedGenre]
   );
 
 export default useGames;
