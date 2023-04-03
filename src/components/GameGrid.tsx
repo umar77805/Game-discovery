@@ -5,7 +5,7 @@ import GameSkeleton from "./GameSkeleton";
 
 const GameGrid = () => {
   const { error, games, isLoading } = useGames();
-  const skeletonArray = [1, 2, 3, 4, 5, 6];
+  const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
     <>
       {error && <p>{error}</p>}

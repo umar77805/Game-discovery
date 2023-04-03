@@ -1,12 +1,4 @@
-import {
-  Card,
-  CardBody,
-  Heading,
-  HStack,
-  Skeleton,
-  Stack,
-} from "@chakra-ui/react";
-import PlatformIcons from "./PlatformIcons";
+import { Card, CardBody, Skeleton, Stack } from "@chakra-ui/react";
 
 const GameSkeleton = () => {
   return (
