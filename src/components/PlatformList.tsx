@@ -1,6 +1,7 @@
 import {
+  Box,
   Button,
-  HStack,
+  Flex,
   Menu,
   MenuButton,
   MenuItem,
@@ -26,26 +27,28 @@ const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
   if (error) return null;
 
   return (
-    <HStack>
-      <Menu>
-        <MenuButton as={Button} rightIcon={<FiChevronDown />}>
-          {curentPlatform ? curentPlatform : <Text>All Platforms</Text>}
-        </MenuButton>
-        <MenuList>
-          {isLoading && <Spinner />}
-          {data.map((platform) => (
-            <MenuItem
-              onClick={() => {
-                SetCurrentPlatform(platform.name);
-                onSelectedPlatform(platform);
-              }}
-              key={platform.id}
-            >
-              {platform.name}
-            </MenuItem>
-          ))}
-        </MenuList>
-      </Menu>
+    <Flex paddingLeft={2}>
+      <Box marginRight={2}>
+        <Menu>
+          <MenuButton as={Button} rightIcon={<FiChevronDown />}>
+            {curentPlatform ? curentPlatform : <Text>All Platforms</Text>}
+          </MenuButton>
+          <MenuList>
+            {isLoading && <Spinner />}
+            {data.map((platform) => (
+              <MenuItem
+                onClick={() => {
+                  SetCurrentPlatform(platform.name);
+                  onSelectedPlatform(platform);
+                }}
+                key={platform.id}
+              >
+                {platform.name}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Menu>
+      </Box>
       <Button
         onClick={() => {
           onReset();
@@ -54,7 +57,7 @@ const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
       >
         <RiRestartLine size={20} />
       </Button>
-    </HStack>
+    </Flex>
   );
 };
 
