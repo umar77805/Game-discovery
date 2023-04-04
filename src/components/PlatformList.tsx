@@ -23,6 +23,7 @@ interface Props {
 const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
   const [curentPlatform, SetCurrentPlatform] = useState("");
   const { data, isLoading, error } = usePlatforms();
+  const border = "1px solid black";
 
   if (error) return null;
 
@@ -30,7 +31,7 @@ const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
     <Flex>
       <Box marginRight={2}>
         <Menu>
-          <MenuButton as={Button} rightIcon={<FiChevronDown />}>
+          <MenuButton as={Button} border={border} rightIcon={<FiChevronDown />}>
             {curentPlatform ? curentPlatform : <Text>All Platforms</Text>}
           </MenuButton>
           <MenuList>
@@ -50,6 +51,7 @@ const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
         </Menu>
       </Box>
       <Button
+        border={border}
         onClick={() => {
           onReset();
           SetCurrentPlatform("");

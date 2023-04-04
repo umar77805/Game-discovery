@@ -21,6 +21,7 @@ interface Props {
 
 const GenreList = ({ selectedGenre, onSeletedGenre, onReset }: Props) => {
   const { data, isLoading, error } = useGenres();
+  const border = "1px solid black";
 
   if (isLoading) return <Spinner />;
 
@@ -35,7 +36,7 @@ const GenreList = ({ selectedGenre, onSeletedGenre, onReset }: Props) => {
         justifyContent={"space-between"}
       >
         <Heading size={"md"}>All Genres</Heading>
-        <Button onClick={() => onReset()}>
+        <Button border={border} onClick={() => onReset()}>
           <RiRestartLine />
         </Button>
       </HStack>
