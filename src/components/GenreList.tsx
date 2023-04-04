@@ -35,7 +35,7 @@ const GenreList = ({ selectedGenre, onSeletedGenre, onReset }: Props) => {
         justifyContent={"space-between"}
       >
         <Heading size={"md"}>All Genres</Heading>
-        <Button onClick={() => onReset()} variant={"ghost"}>
+        <Button onClick={() => onReset()}>
           <RiRestartLine />
         </Button>
       </HStack>

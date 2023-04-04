@@ -27,7 +27,7 @@ const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
   if (error) return null;
 
   return (
-    <Flex paddingLeft={2}>
+    <Flex>
       <Box marginRight={2}>
         <Menu>
           <MenuButton as={Button} rightIcon={<FiChevronDown />}>

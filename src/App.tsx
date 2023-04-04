@@ -1,4 +1,4 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import { useState } from "react";
 import AppHeading from "./components/AppHeading";
 import GameGrid from "./components/GameGrid";
@@ -43,11 +43,13 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <AppHeading query={query} />
-        <PlatformList
-          onSelectedPlatform={(platform) => setQuery({ ...query, platform })}
-          onReset={() => setQuery({ ...query, platform: null })}
-        />
+        <Box paddingLeft={2} marginBottom={2}>
+          <AppHeading query={query} />
+          <PlatformList
+            onSelectedPlatform={(platform) => setQuery({ ...query, platform })}
+            onReset={() => setQuery({ ...query, platform: null })}
+          />
+        </Box>
         <GameGrid gameQuery={query} />
       </GridItem>
     </Grid>
