@@ -10,6 +10,7 @@ import { Genres } from "./hooks/useGenres";
 export interface Query {
   genre: Genres | null;
   platform: Platform | null;
+  search: string;
 }
 
 function App() {
@@ -27,7 +28,9 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <Navbar />
+        <Navbar
+          onValue={(searchText) => setQuery({ ...query, search: searchText })}
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX="10px">
