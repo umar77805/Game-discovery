@@ -1,5 +1,6 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import { useState } from "react";
+import AppHeading from "./components/AppHeading";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import Navbar from "./components/Navbar";
@@ -42,6 +43,7 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
+        <AppHeading query={query} />
         <PlatformList
           onSelectedPlatform={(platform) => setQuery({ ...query, platform })}
           onReset={() => setQuery({ ...query, platform: null })}
