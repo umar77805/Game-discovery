@@ -8,6 +8,7 @@ import {
   MenuList,
   Spinner,
   Text,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
@@ -50,15 +51,17 @@ const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
           </MenuList>
         </Menu>
       </Box>
-      <Button
-        border={border}
-        onClick={() => {
-          onReset();
-          SetCurrentPlatform("");
-        }}
-      >
-        <RiRestartLine size={20} />
-      </Button>
+      <Tooltip label="Reset Platforms">
+        <Button
+          border={border}
+          onClick={() => {
+            onReset();
+            SetCurrentPlatform("");
+          }}
+        >
+          <RiRestartLine size={20} />
+        </Button>
+      </Tooltip>
     </Flex>
   );
 };

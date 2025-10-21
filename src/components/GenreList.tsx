@@ -7,6 +7,7 @@ import {
   ListItem,
   Spinner,
   Text,
+  Tooltip,
   VStack,
 } from "@chakra-ui/react";
 import { RiRestartLine } from "react-icons/ri";
@@ -36,9 +37,11 @@ const GenreList = ({ selectedGenre, onSeletedGenre, onReset }: Props) => {
         justifyContent={"space-between"}
       >
         <Heading size={"md"}>All Genres</Heading>
-        <Button border={border} onClick={() => onReset()}>
-          <RiRestartLine />
-        </Button>
+        <Tooltip label="Reset Genres">
+          <Button border={border} onClick={() => onReset()}>
+            <RiRestartLine />
+          </Button>
+        </Tooltip>
       </HStack>
       <List>
         {data.map((genre) => (

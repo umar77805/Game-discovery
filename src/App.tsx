@@ -38,7 +38,9 @@ function App() {
           <GenreList
             selectedGenre={query.genre}
             onSeletedGenre={(genre) => setQuery({ ...query, genre })}
-            onReset={() => setQuery({ ...query, genre: null })}
+            onReset={() =>
+              query.genre !== null ? setQuery({ ...query, genre: null }) : null
+            }
           />
         </GridItem>
       </Show>
