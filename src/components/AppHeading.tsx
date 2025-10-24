@@ -8,7 +8,7 @@ interface Props {
 const AppHeading = ({ query }: Props) => {
   const heading = `Showing All ${query.platform?.name || ""} ${
     query.genre?.name || ""
-  } Games`;
+  } Games${query.search ? `. Search Included: ${query.search}` : ""}`;
   return <Heading marginBottom={5}>{heading}</Heading>;
 };
 

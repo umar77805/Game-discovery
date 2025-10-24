@@ -1,26 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosRequestConfig } from "axios";
-import apiClient from "../services/api-client";
+import APIClient from "../services/api-client";
 import Utilities from "../services/utilities";
-
-interface Response<T> {
-  count: number;
-  results: T[];
-}
 
 const useData = <T>(
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
   dependencyKeys?: any[]
 ) => {
+  const apiClient = new APIClient<T>(endpoint);
 
   return useQuery<T[], Error>({
     queryKey: [...Utilities.getQueryKey(endpoint), ...(dependencyKeys || [])],
-    queryFn: () => apiClient
-      .get<Response<T>>(endpoint, {
-        ...requestConfig,
-      })
-      .then((response) => response.data.results)
+    queryFn: () => apiClient.getAll(requestConfig)
   })
 };
 
