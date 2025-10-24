@@ -16,7 +16,7 @@ const endpoint = "/games";
 const apiClient = new APIClient<Game>(endpoint);
 
 const useGames = (gameQuery: Query) => useInfiniteQuery<Response<Game>, Error>({
-  queryKey: [...Utilities.getQueryKey(endpoint), gameQuery],
+  queryKey: [...Utilities.getQueryKey(endpoint), { genreId: (gameQuery && gameQuery.genre) ? gameQuery.genre.id : null, platFormId: (gameQuery && gameQuery.platform) ? gameQuery.platform.id : null, search: (gameQuery && gameQuery.search) ? gameQuery.search : null }],
   queryFn: ({ pageParam = 1 }) => apiClient.getAll({
     params: {
       genres: gameQuery.genre?.id,
