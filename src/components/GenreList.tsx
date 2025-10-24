@@ -45,7 +45,7 @@ const GenreList = ({ selectedGenre, onSeletedGenre, onReset }: Props) => {
         </Tooltip>
       </HStack>
       <List>
-        {data?.map((genre) => (
+        {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image

@@ -37,7 +37,7 @@ const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
           </MenuButton>
           <MenuList>
             {isLoading && <Spinner />}
-            {data?.map((platform) => (
+            {data?.results.map((platform) => (
               <MenuItem
                 onClick={() => {
                   SetCurrentPlatform(platform.name);

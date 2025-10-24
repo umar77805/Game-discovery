@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import APIClient from "../services/api-client";
+import APIClient, { Response } from "../services/api-client";
 import Utilities from "../services/utilities";
 
 export interface Platform {
@@ -11,7 +11,7 @@ export interface Platform {
 const endpoint = "/platforms/lists/parents";
 const apiClient = new APIClient<Platform>(endpoint);
 
-const usePlatforms = () => useQuery<Platform[], Error>({
+const usePlatforms = () => useQuery<Response<Platform>, Error>({
   queryKey: [...Utilities.getQueryKey(endpoint)],
   queryFn: () => apiClient.getAll()
 })
