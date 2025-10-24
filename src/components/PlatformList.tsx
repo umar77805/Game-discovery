@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { RiRestartLine } from "react-icons/ri";
-import { Platform } from "../hooks/useGames";
+import { Platform } from "../hooks/usePlatforms";
 import usePlatforms from "../hooks/usePlatforms";
 
 interface Props {
