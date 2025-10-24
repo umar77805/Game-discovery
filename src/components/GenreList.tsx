@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { RiRestartLine } from "react-icons/ri";
 import useGenres, { Genres } from "../hooks/useGenres";
+import Utilities from "../services/utilities";
 import CroppedImage from "../services/image-url";
 
 interface Props {
@@ -44,7 +45,7 @@ const GenreList = ({ selectedGenre, onSeletedGenre, onReset }: Props) => {
         </Tooltip>
       </HStack>
       <List>
-        {data.map((genre) => (
+        {data?.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image
@@ -52,13 +53,17 @@ const GenreList = ({ selectedGenre, onSeletedGenre, onReset }: Props) => {
                 boxSize="40px"
                 src={CroppedImage(genre.image_background)}
               />
-              <Button
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-                onClick={() => onSeletedGenre(genre)}
-                variant="ghost"
-              >
-                {genre.name}
-              </Button>
+              <Tooltip label={genre.name}>
+                <Button
+                  fontWeight={
+                    genre.id === selectedGenre?.id ? "bold" : "normal"
+                  }
+                  onClick={() => onSeletedGenre(genre)}
+                  variant="ghost"
+                >
+                  {Utilities.stringShorten(genre.name)}
+                </Button>
+              </Tooltip>
             </HStack>
           </ListItem>
         ))}

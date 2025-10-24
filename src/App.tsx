@@ -15,7 +15,10 @@ export interface Query {
 }
 
 function App() {
-  const [query, setQuery] = useState<Query>({} as Query);
+  const [query, setQuery] = useState<Query>({
+    genre: null,
+    platform: null,
+  } as Query);
 
   return (
     <Grid

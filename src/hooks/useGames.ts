@@ -24,8 +24,6 @@ const useGames = (gameQuery: Query) =>
         parent_platforms: gameQuery.platform?.id,
         search: gameQuery.search,
       },
-    },
-    [gameQuery]
-  );
+    }, [gameQuery]);
 
 export default useGames;
