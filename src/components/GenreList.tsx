@@ -11,17 +11,14 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { RiRestartLine } from "react-icons/ri";
-import useGenres, { Genres } from "../hooks/useGenres";
-import Utilities from "../services/utilities";
+import useGenres from "../hooks/useGenres";
 import CroppedImage from "../services/image-url";
+import Utilities from "../services/utilities";
+import useGameQueryStore from "../stores/useAppStore";
 
-interface Props {
-  onSeletedGenre: (genre: Genres) => void;
-  selectedGenre: Genres | null;
-  onReset: () => void;
-}
-
-const GenreList = ({ selectedGenre, onSeletedGenre, onReset }: Props) => {
+const GenreList = () => {
+  const selectedGenre = useGameQueryStore((set) => set.gameQuery.genre);
+  const setSelectedGenre = useGameQueryStore((set) => set.setGenre);
   const { data, isLoading, error } = useGenres();
   const border = "1px solid black";
 
@@ -39,7 +36,7 @@ const GenreList = ({ selectedGenre, onSeletedGenre, onReset }: Props) => {
       >
         <Heading size={"md"}>All Genres</Heading>
         <Tooltip label="Reset Genres">
-          <Button border={border} onClick={() => onReset()}>
+          <Button border={border} onClick={() => setSelectedGenre(null)}>
             <RiRestartLine />
           </Button>
         </Tooltip>
@@ -58,7 +55,7 @@ const GenreList = ({ selectedGenre, onSeletedGenre, onReset }: Props) => {
                   fontWeight={
                     genre.id === selectedGenre?.id ? "bold" : "normal"
                   }
-                  onClick={() => onSeletedGenre(genre)}
+                  onClick={() => setSelectedGenre(genre)}
                   variant="ghost"
                 >
                   {Utilities.stringShorten(genre.name)}

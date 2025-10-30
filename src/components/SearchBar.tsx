@@ -6,18 +6,16 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BiSearchAlt } from "react-icons/bi";
+import useGameQueryStore from "../stores/useAppStore";
 
-interface Props {
-  onValue: (value: string) => void;
-}
-
-const SearchBar = ({ onValue }: Props) => {
+const SearchBar = () => {
+  const setSearchText = useGameQueryStore((set) => set.setSearchText);
   const searchRef = useRef<HTMLInputElement>(null);
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        if (searchRef.current) onValue(searchRef.current.value);
+        if (searchRef.current) setSearchText(searchRef.current.value);
       }}
     >
       <InputGroup>

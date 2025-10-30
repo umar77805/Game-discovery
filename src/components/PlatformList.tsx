@@ -13,15 +13,11 @@ import {
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { RiRestartLine } from "react-icons/ri";
-import { Platform } from "../hooks/usePlatforms";
 import usePlatforms from "../hooks/usePlatforms";
+import useGameQueryStore from "../stores/useAppStore";
 
-interface Props {
-  onSelectedPlatform: (platform: Platform) => void;
-  onReset: () => void;
-}
-
-const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
+const PlatformList = () => {
+  const setSelectedPlatform = useGameQueryStore((set) => set.setPlatform);
   const [curentPlatform, SetCurrentPlatform] = useState("");
   const { data, isLoading, error } = usePlatforms();
   const border = "1px solid black";
@@ -41,7 +37,7 @@ const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
               <MenuItem
                 onClick={() => {
                   SetCurrentPlatform(platform.name);
-                  onSelectedPlatform(platform);
+                  setSelectedPlatform(platform);
                 }}
                 key={platform.id}
               >
@@ -55,7 +51,7 @@ const PlatformList = ({ onSelectedPlatform, onReset }: Props) => {
         <Button
           border={border}
           onClick={() => {
-            onReset();
+            setSelectedPlatform(null);
             SetCurrentPlatform("");
           }}
         >

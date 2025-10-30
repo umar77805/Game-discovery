@@ -1,11 +1,8 @@
 import { Heading } from "@chakra-ui/react";
-import { Query } from "../App";
+import useGameQueryStore from "../stores/useAppStore";
 
-interface Props {
-  query: Query;
-}
-
-const AppHeading = ({ query }: Props) => {
+const AppHeading = () => {
+  const query = useGameQueryStore((set) => set.gameQuery);
   const heading = `Showing All ${query.platform?.name || ""} ${
     query.genre?.name || ""
   } Games${query.search ? `. Search Included: ${query.search}` : ""}`;
