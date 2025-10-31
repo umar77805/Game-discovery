@@ -20,11 +20,16 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  getAll = (config?: AxiosRequestConfig) => {
-    return axiosInstance
+  getAll = (config?: AxiosRequestConfig) =>
+    axiosInstance
       .get<Response<T>>(this.endpoint, config)
       .then(res => res.data);
-  }
+
+
+  get = (additionalEndpoint?: string, config?: AxiosRequestConfig) =>
+    axiosInstance
+      .get<T>(this.endpoint + additionalEndpoint || '', config)
+      .then(res => res.data);
 }
 
 export default APIClient;

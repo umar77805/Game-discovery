@@ -10,12 +10,13 @@ export interface Game {
   background_image: string;
   parent_platforms: { platform: Platform }[];
   metacritic: number;
+  slug: string;
 }
 
 const endpoint = "/games";
 const apiClient = new APIClient<Game>(endpoint);
 
-const useGames = (gameQuery: Query) => useInfiniteQuery<Response<Game>, Error>({
+const useGames = (gameQuery: Query) => useInfiniteQuery({
   queryKey: [...Utilities.getQueryKey(endpoint), { genreId: (gameQuery && gameQuery.genre) ? gameQuery.genre.id : null, platFormId: (gameQuery && gameQuery.platform) ? gameQuery.platform.id : null, search: (gameQuery && gameQuery.search) ? gameQuery.search : null }],
   queryFn: ({ pageParam = 1 }) => apiClient.getAll({
     params: {

@@ -11,7 +11,7 @@ export interface Genres {
 const endpoint = "/genres";
 const apiClient = new APIClient<Genres>(endpoint);
 
-const useGenres = () => useQuery<Response<Genres>, Error>({
+const useGenres = () => useQuery({
   queryKey: [...Utilities.getQueryKey(endpoint)],
   queryFn: () => apiClient.getAll()
 })

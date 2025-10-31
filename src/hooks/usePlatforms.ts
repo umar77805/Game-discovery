@@ -11,7 +11,7 @@ export interface Platform {
 const endpoint = "/platforms/lists/parents";
 const apiClient = new APIClient<Platform>(endpoint);
 
-const usePlatforms = () => useQuery<Response<Platform>, Error>({
+const usePlatforms = () => useQuery({
   queryKey: [...Utilities.getQueryKey(endpoint)],
   queryFn: () => apiClient.getAll()
 })
