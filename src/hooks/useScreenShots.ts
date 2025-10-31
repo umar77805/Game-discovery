@@ -8,11 +8,11 @@ interface ScreenShot {
 
 const endpoint = '/games';
 
-const useScreenShots = (id: number) => {
-  const apiClient = new APIClient<ScreenShot>(`${endpoint}/${id}/screenshots`);
+const useScreenShots = (slug: string) => {
+  const apiClient = new APIClient<ScreenShot>(`${endpoint}/${slug}/screenshots`);
 
   return useQuery({
-    queryKey: ['screenshots', id],
+    queryKey: ['screenshots', slug],
     queryFn: apiClient.getAll
 
   })

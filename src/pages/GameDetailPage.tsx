@@ -22,7 +22,7 @@ const GameDetailPage = () => {
   const { data: gameTrailers, isLoading: isGameVideoLoading } = useTrailers(
     slug!
   );
-  const { data: screenshots } = useScreenShots(game!.id);
+  const { data: screenshots } = useScreenShots(slug!);
 
   if (isLoading) return <Spinner />;
   if (error || !game || !gameTrailers) throw error;
@@ -42,81 +42,76 @@ const GameDetailPage = () => {
       : "";
 
   return (
-    <>
-      <Heading marginBottom={2}>{game.name}</Heading>
-      <SummariseText text={game.description_raw} maxLength={500} />
-      <SimpleGrid spacing={3} columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}>
-        <GameAttribute
-          heading="Platforms"
-          attributes={game.parent_platforms.map(
-            (platformObj) => platformObj.platform.name
-          )}
-        />
-        <GameAttribute
-          heading="Metascore"
-          attributes={[
-            <Box display={"flex"}>
-              <GameCriticScore score={game.metacritic} />
-              {game.metacritic && (
-                <a
-                  href={game.metacritic_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <RiLinkM style={{ marginLeft: "5px", cursor: "pointer" }} />
-                </a>
-              )}
-            </Box>,
-          ]}
-        />
-
-        <GameAttribute
-          heading="Genres"
-          attributes={game.genres.map((genreObj) => genreObj.name)}
-        />
-
-        <GameAttribute
-          heading="Publishers"
-          attributes={game.publishers.map(
-            (publishersObj) => publishersObj.name
-          )}
-        />
-      </SimpleGrid>
-      <Box marginY={5}>
-        {isGameVideoLoading ? (
-          <Spinner />
-        ) : !videoLink ? (
-          <Box
-            style={{
-              width: "30vw",
-              aspectRatio: 1,
-              background: "black",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <TbVideoOff color="white" />
-            <Text color="White">Video not available</Text>
-          </Box>
-        ) : (
-          <video
-            style={{ width: "50vw" }}
-            src={videoLink}
-            controls
-            autoPlay
-            muted
-            loop
+    <SimpleGrid columns={{ sm: 1, md: 2 }}>
+      <Box>
+        <Heading marginBottom={2}>{game.name}</Heading>
+        <SummariseText text={game.description_raw} maxLength={500} />
+        <SimpleGrid spacing={3} columns={{ sm: 2 }}>
+          <GameAttribute
+            heading="Platforms"
+            attributes={game.parent_platforms.map(
+              (platformObj) => platformObj.platform.name
+            )}
           />
-        )}
+          <GameAttribute
+            heading="Metascore"
+            attributes={[
+              <Box display={"flex"}>
+                <GameCriticScore score={game.metacritic} />
+                {game.metacritic && (
+                  <a
+                    href={game.metacritic_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <RiLinkM style={{ marginLeft: "5px", cursor: "pointer" }} />
+                  </a>
+                )}
+              </Box>,
+            ]}
+          />
+          <GameAttribute
+            heading="Genres"
+            attributes={game.genres.map((genreObj) => genreObj.name)}
+          />
+          <GameAttribute
+            heading="Publishers"
+            attributes={game.publishers.map(
+              (publishersObj) => publishersObj.name
+            )}
+          />
+        </SimpleGrid>
       </Box>
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing={2}>
-        {screenshots?.results.map((screenshot, idx) => (
-          <Image key={idx} src={screenshot.image} draggable={false} />
-        ))}
-      </SimpleGrid>
-    </>
+      <Box>
+        <Box marginY={5}>
+          {isGameVideoLoading ? (
+            <Spinner />
+          ) : !videoLink ? (
+            <Box
+              style={{
+                width: "100%",
+                aspectRatio: "1",
+                background: "black",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <TbVideoOff color="white" />
+              <Text color="White">Video not available</Text>
+            </Box>
+          ) : (
+            <video src={videoLink} controls autoPlay muted loop />
+          )}
+        </Box>
+        <SimpleGrid columns={{ sm: 1, md: 2 }} spacing={2}>
+          {screenshots?.results.map((screenshot, idx) => (
+            <Image key={idx} src={screenshot.image} draggable={false} />
+          ))}
+        </SimpleGrid>
+      </Box>
+    </SimpleGrid>
   );
 };
 
