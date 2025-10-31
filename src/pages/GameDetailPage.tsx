@@ -1,10 +1,10 @@
 import {
-  AspectRatio,
   Box,
   Heading,
   SimpleGrid,
   Spinner,
   Text,
+  Image,
 } from "@chakra-ui/react";
 import { useParams } from "react-router";
 import GameAttribute from "../components/GameAttribute";
@@ -14,6 +14,7 @@ import useGame from "../hooks/useGame";
 import { RiLinkM } from "react-icons/ri";
 import { TbVideoOff } from "react-icons/tb";
 import useTrailers from "../hooks/useGameVideo";
+import useScreenShots from "../hooks/useScreenShots";
 
 const GameDetailPage = () => {
   const { slug } = useParams();
@@ -21,6 +22,7 @@ const GameDetailPage = () => {
   const { data: gameTrailers, isLoading: isGameVideoLoading } = useTrailers(
     slug!
   );
+  const { data: screenshots } = useScreenShots(game!.id);
 
   if (isLoading) return <Spinner />;
   if (error || !game || !gameTrailers) throw error;
@@ -109,6 +111,11 @@ const GameDetailPage = () => {
           />
         )}
       </Box>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing={2}>
+        {screenshots?.results.map((screenshot, idx) => (
+          <Image key={idx} src={screenshot.image} draggable={false} />
+        ))}
+      </SimpleGrid>
     </>
   );
 };
