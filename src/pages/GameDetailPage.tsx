@@ -1,7 +1,7 @@
 import { Heading, Spinner, Text } from "@chakra-ui/react";
 import { useParams } from "react-router";
+import SummariseText from "../components/SummariseText";
 import useGame from "../hooks/useGame";
-import ErrorPage from "./ErrorPage";
 
 const GameDetailPage = () => {
   const { slug } = useParams();
@@ -12,8 +12,8 @@ const GameDetailPage = () => {
 
   return (
     <>
-      <Heading>{data.name}</Heading>
-      <Text>{data.description_raw}</Text>
+      <Heading marginBottom={2}>{data.name}</Heading>
+      <SummariseText text={data.description_raw} maxLength={500} />
     </>
   );
 };
