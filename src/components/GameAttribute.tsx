@@ -9,7 +9,7 @@ interface Props {
 const GameAttribute = ({ attributes, heading }: Props) => {
   return (
     <Box marginTop={5}>
-      <Heading as="h3" fontSize={"20px"} textColor="gray" marginBottom={2}>
+      <Heading as="h3" fontSize={"20px"} color="gray" marginBottom={2}>
         {heading}
       </Heading>
       {attributes.map((attribute, idx) => (

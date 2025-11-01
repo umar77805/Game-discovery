@@ -7,7 +7,6 @@ import {
   ListItem,
   Spinner,
   Text,
-  Tooltip,
   VStack,
 } from "@chakra-ui/react";
 import { RiRestartLine } from "react-icons/ri";
@@ -15,6 +14,7 @@ import useGenres from "../hooks/useGenres";
 import CroppedImage from "../services/image-url";
 import Utilities from "../services/utilities";
 import useGameQueryStore from "../stores/useAppStore";
+import { Tooltip } from "./ui/tooltip";
 
 const GenreList = () => {
   const selectedGenre = useGameQueryStore((set) => set.gameQuery.genre);
@@ -35,13 +35,13 @@ const GenreList = () => {
         justifyContent={"space-between"}
       >
         <Heading size={"md"}>All Genres</Heading>
-        <Tooltip label="Reset Genres">
+        <Tooltip content="Reset Genres">
           <Button border={border} onClick={() => setSelectedGenre(null)}>
             <RiRestartLine />
           </Button>
         </Tooltip>
       </HStack>
-      <List>
+      <List.Root listStyle="none">
         {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
@@ -50,7 +50,7 @@ const GenreList = () => {
                 boxSize="40px"
                 src={CroppedImage(genre.image_background)}
               />
-              <Tooltip label={genre.name}>
+              <Tooltip content={genre.name}>
                 <Button
                   fontWeight={
                     genre.id === selectedGenre?.id ? "bold" : "normal"
@@ -64,7 +64,7 @@ const GenreList = () => {
             </HStack>
           </ListItem>
         ))}
-      </List>
+      </List.Root>
     </VStack>
   );
 };

@@ -46,7 +46,7 @@ const GameDetailPage = () => {
       <Box>
         <Heading marginBottom={2}>{game.name}</Heading>
         <SummariseText text={game.description_raw} maxLength={500} />
-        <SimpleGrid spacing={3} columns={{ sm: 2 }}>
+        <SimpleGrid gap={3} columns={{ sm: 2 }}>
           <GameAttribute
             heading="Platforms"
             attributes={game.parent_platforms.map(
@@ -57,15 +57,19 @@ const GameDetailPage = () => {
             heading="Metascore"
             attributes={[
               <Box display={"flex"}>
-                <GameCriticScore score={game.metacritic} />
                 {game.metacritic && (
-                  <a
-                    href={game.metacritic_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <RiLinkM style={{ marginLeft: "5px", cursor: "pointer" }} />
-                  </a>
+                  <>
+                    <GameCriticScore score={game.metacritic} />
+                    <a
+                      href={game.metacritic_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <RiLinkM
+                        style={{ marginLeft: "5px", cursor: "pointer" }}
+                      />
+                    </a>
+                  </>
                 )}
               </Box>,
             ]}
@@ -105,7 +109,7 @@ const GameDetailPage = () => {
             <video src={videoLink} controls autoPlay muted loop />
           )}
         </Box>
-        <SimpleGrid columns={{ sm: 1, md: 2 }} spacing={2}>
+        <SimpleGrid columns={{ sm: 1, md: 2 }} gap={2}>
           {screenshots?.results.map((screenshot, idx) => (
             <Image key={idx} src={screenshot.image} draggable={false} />
           ))}

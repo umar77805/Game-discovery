@@ -29,11 +29,16 @@ const PlatformIcons = ({ platforms }: Props) => {
     ios: MdPhoneIphone,
     web: BsGlobe,
   };
+
+  const iconKeys = new Set(Object.keys(icons));
+
   return (
     <HStack marginY={2}>
-      {platforms.map((platform) => (
-        <Icon key={platform.id} as={icons[platform.slug]} color="gray.500" />
-      ))}
+      {platforms
+        .filter((platform) => iconKeys.has(platform.slug))
+        .map((platform) => (
+          <Icon key={platform.id} as={icons[platform.slug]} color="gray.500" />
+        ))}
     </HStack>
   );
 };

@@ -1,12 +1,12 @@
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { ChakraProvider, createSystem, defaultSystem } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router";
+import { ColorModeProvider } from "./components/ui/color-mode";
 import "./index.css";
 import router from "./routes";
-import theme from "./theme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,9 +19,10 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-        <RouterProvider router={router} />
+      <ChakraProvider value={defaultSystem}>
+        <ColorModeProvider>
+          <RouterProvider router={router} />
+        </ColorModeProvider>
       </ChakraProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>

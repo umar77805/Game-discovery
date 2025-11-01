@@ -1,9 +1,4 @@
-import {
-  background,
-  Input,
-  InputGroup,
-  InputLeftElement,
-} from "@chakra-ui/react";
+import { Input, InputGroup } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { useNavigate } from "react-router";
@@ -23,12 +18,11 @@ const SearchBar = () => {
         }
       }}
     >
-      <InputGroup>
-        <InputLeftElement pointerEvents="none" children={<BiSearchAlt />} />
+      <InputGroup startElement={<BiSearchAlt />}>
         <Input
           ref={searchRef}
           boxShadow="xl"
-          focusBorderColor="gray"
+          focusRingColor="gray"
           borderRadius={20}
           placeholder="Search games"
           type="text"

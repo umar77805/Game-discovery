@@ -12,7 +12,7 @@ interface Props {
 const GameCard = ({ game }: Props) => {
   return (
     <Link to={`/games/${game.slug}`}>
-      <Card
+      <Card.Root
         border="2px solid black"
         overflow="hidden"
         _hover={{
@@ -28,10 +28,10 @@ const GameCard = ({ game }: Props) => {
             <PlatformIcons
               platforms={game.parent_platforms.map((p) => p.platform)}
             />
-            <GameCriticScore score={game.metacritic} />
+            {game.metacritic && <GameCriticScore score={game.metacritic} />}
           </HStack>
         </CardBody>
-      </Card>
+      </Card.Root>
     </Link>
   );
 };

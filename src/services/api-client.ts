@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-
 export interface Response<T> {
   count: number;
   next: string | null
@@ -9,7 +8,7 @@ export interface Response<T> {
 const axiosInstance = axios.create({
   baseURL: "https://api.rawg.io/api",
   params: {
-    key: "1b8bbbbfbb61446eb7ecc17221f66586",
+    key: import.meta.env.VITE_RAWG_API_KEY,
   },
 });
 
